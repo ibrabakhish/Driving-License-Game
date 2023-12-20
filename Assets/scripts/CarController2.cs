@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarController : MonoBehaviour
+public class CarController2 : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public float speed = 5f;
@@ -34,7 +34,8 @@ public class CarController : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.CompareTag("Hatchback"))
+
+                    if (hit.collider.CompareTag("Taxi"))
                     {
                         this.isClicked = true;
                     }
@@ -52,12 +53,12 @@ public class CarController : MonoBehaviour
         // Check if both lineRenderer and gameObject are not null
         if (lineRenderer != null && gameObject != null)
         {
-
-            MoveCarOnClick();
-            if (isClicked)
-            {
-                MoveToNextWaypoint();
-            }
+ 
+                MoveCarOnClick();
+                if (isClicked)
+                {
+                    MoveToNextWaypoint();
+                }
         }
         else
         {
@@ -87,6 +88,11 @@ public class CarController : MonoBehaviour
             // The car has reached the end of the line
             // You may want to reset the currentWaypointIndex or perform other actions
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"{gameObject.name} collided with {collision.gameObject.name}");
     }
 }
 
